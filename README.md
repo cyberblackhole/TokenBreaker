@@ -1,16 +1,15 @@
 # TokenBreaker
 
-Token Breaker is focused on 2 particular vulnerability related JWT tokens.
+Token Breaker is focused on 2 particular vulnerability related to JWT tokens.
 
 <ul>
-  <li>1. The None Algorithm(Not pushed yet)</li>
-  <li>2. RSAtoHMAC</li>
+  <li>None Algorithm(Not pushed yet)</li>
+  <li>RSAtoHMAC</li>
 </ul>
 
 Refer to <a href="https://auth0.com/blog/critical-vulnerabilities-in-json-web-token-libraries/" >this</a> link about insights of the vulnerability and how an attacker can forge the tokens
 
 <h1>RSAtoHMAC Usage</h1>
-
 <code><pre>
 usage: RsaToHmac.py [-h] -t TOKEN -p PUBKEY
 
@@ -26,7 +25,6 @@ required arguments:
 Example Usage: python RsatoHMAC.py -t [JWTtoken] -p [PathtoPublickeyfile]</pre></code>
 
 <h1>Output</h1>
-
 <code><pre>
 ./RsaToHmac.py -t eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9kZW1vLnNqb2VyZGxhbmdrZW1wZXIubmxcLyIsImlhdCI6MTUzNzUxODczMiwiZXhwIjoxNTM3NTE4ODUyLCJkYXRhIjp7ImhlbGxvIjoid29ybGQifX0.GwWRgb31V7OaxFt9wMd8LlLWWi4Z3zJ4NL7k38yz2mRYzKht1cFYrsxQv4DJdGLwV6D6L08iwF7_J90usGnJoLw8OLVUZvcDRH8rgGtpICSjhv1qaWiHW4-Gcqet4NieJLuvZzJn2imV2-x5TUDJJICKUaj183EvuJTOnjWuD0-ieT3ixhXbm0-E_9LqsGIUJrRQZfPkFOgpH8OLaJYscJwUghWOEphYV-jeek91Qu3TJkeXUuIUUuCF_l6x3eIHheQ0eYLuFc7Ug85HFWemeQ4rK7kMr8sDd3YKnFwZIoDPF6gnnr3lNOydDbpjn-KHnu1oU0E2zk1NIgHPs4TVww -p /tmp/pub
 Decoded Header value is : {"typ":"JWT","alg":"RS256"}
