@@ -16,16 +16,16 @@ def pad_check(data):
 def print_header(token,pubkey):
     base64header=pad_check(token.split('.')[0])
     base64payload=pad_check(token.split('.')[1])
-    print "Decoded Header value is : "+base64.b64decode(base64header)
+    print "\nDecoded Header value is : "+base64.b64decode(base64header)
     print "Decode Payload value is : "+base64.b64decode(base64payload)
-    header=raw_input("Enter your header Value: ")
+    header=raw_input("\nEnter your header Value: ")
     payload=raw_input("Enter your payload value: ")
     base64header = base64.b64encode(header).rstrip('=')
     base64payload = base64.b64encode(payload).rstrip('=')
     f=open(pubkey,'r')
     headerandpayload = base64header + '.' + base64payload
     finaljwt = headerandpayload+'.'+base64.b64encode(hmac.new(f.read(), msg=headerandpayload, digestmod=hashlib.sha256).digest()).replace('/','_').replace('+','-').strip('=')
-    print("Successfully encoded Token: \n" + finaljwt)
+    print("\nSuccessfully encoded Token: \n" + finaljwt)
 
 def main():
     parser = argparse.ArgumentParser(description='TokenBreaker: 2.RSAtoHMAC',
