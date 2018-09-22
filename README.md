@@ -38,7 +38,7 @@ New header value with none algorithm:
 {"alg":"none","typ":"JWS"}
 
 Successfully encoded Token: 
-eyJhbGciOiJub25lIiwidHlwIjoiSldTIn0.eyJsb2dpbiI6ImFkbSIsImlhdCI6IjE1Mzc1MjMxMjIifQ
+eyJhbGciOiJub25lIiwidHlwIjoiSldTIn0.eyJsb2dpbiI6ImFkbSIsImlhdCI6IjE1Mzc1MjMxMjIifQ.
 </pre></code>
 
 
