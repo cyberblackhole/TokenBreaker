@@ -9,6 +9,8 @@ Token Breaker is focused on 2 particular vulnerability related to JWT tokens.
 
 Refer to <a href="https://auth0.com/blog/critical-vulnerabilities-in-json-web-token-libraries/" >this</a> link about insights of the vulnerability and how an attacker can forge the tokens
 
+<p>Try out this vulnerability <a href="http://demo.sjoerdlangkemper.nl/jwtdemo/rs256.php?">here</a></p>
+
 <h1>TheNone Usage</h1>
 <code>
 <pre>
@@ -71,5 +73,5 @@ Successfully encoded Token:
 eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9kZW1vLnNqb2VyZGxhbmdrZW1wZXIubmxcLyIsImlhdCI6MTUzNzUxODczMiwiZXhwIjoxNTM3NTE4ODUyLCJkYXRhIjp7ImhlbGxvIjoid29ybGQifX0.aZ03C84GU7WfIFsyvRzr9NUhtDQttOvA6CW5fUxGXmU
 </pre></code>
 
-<p>Try out this vulnerability <a href="http://demo.sjoerdlangkemper.nl/jwtdemo/rs256.php?">here</a></p>
+
 
