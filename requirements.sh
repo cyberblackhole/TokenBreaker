@@ -7,7 +7,6 @@ set -x
 # Make sure we have nano and unzip.
 sudo apt-get update
 
-pip install art
-pip install huepy
+pip install art huepy argparse
 
 echo 'Setup Completed'
