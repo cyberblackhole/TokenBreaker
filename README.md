@@ -52,7 +52,7 @@ required arguments:
   -t TOKEN, --token TOKEN           JWT Token value
   -p PUBKEY, --pubkey PUBKEY        Path to Public key File
 
-Example Usage: python RsatoHMAC.py -t [JWTtoken] -p [PathtoPublickeyfile]</pre></code>
+Example Usage: python RsatoHMAC.py -t [JWTtoken] -p [PathtoPublickeyfile]
 ```
 
 ### Output
