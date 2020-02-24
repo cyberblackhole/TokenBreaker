@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from naryal2580.style import info, coolInput, bad, good
+from stoyled import *
 from argparse import ArgumentParser
 from base64 import b64encode, b64decode
 from re import sub as reSubst

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-from naryal2580.style import info, coolInput, good
+from stoyled import *
 from argparse import ArgumentParser
 from base64 import b64decode, b64encode
 from re import sub as reSubst
